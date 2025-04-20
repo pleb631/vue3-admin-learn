@@ -13,7 +13,6 @@ let LayOutSettingStore = useLayOutSettingStore();
 let userStore = useUserStore();
 
 const $router = useRouter();
-console.log($router.currentRoute.value.path);
 </script>
 
 <template>

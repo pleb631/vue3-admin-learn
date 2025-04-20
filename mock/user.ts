@@ -57,6 +57,7 @@ export default [
         response: (request) => {
             //获取请求头携带token
             const token = request.headers.token;
+            
             //查看用户信息是否包含有次token用户
             const checkUser = createUserList().find(
                 (item) => item.token === token

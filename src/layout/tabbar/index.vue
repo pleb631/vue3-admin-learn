@@ -50,20 +50,20 @@ import type { Loading } from 'element-plus/es/components/loading/src/service.mjs
                 circle
             ></el-button>
             <img
-                src="/logo.jpg"
-                style="width: 24px; height: 24px; margin: 0px 10px"
+                :src="userStore.avatar"
+                style="width: 24px; height: 24px; margin: 0px 10px; border-radius: 50%;"
             />
             <!-- 下拉菜单 -->
             <el-dropdown>
                 <span class="el-dropdown-link">
-                    admin
+                    {{ userStore.username }}
                     <el-icon class="el-icon--right">
                         <arrow-down />
                     </el-icon>
                 </span>
                 <template #dropdown>
                     <el-dropdown-menu>
-                        <el-dropdown-item>退出登陆</el-dropdown-item>
+                        <el-dropdown-item @click="logout">退出登陆</el-dropdown-item>
                     </el-dropdown-menu>
                 </template>
             </el-dropdown>
@@ -74,10 +74,13 @@ import type { Loading } from 'element-plus/es/components/loading/src/service.mjs
 <script setup lang="ts">
 import useLayOutSettingStore from "@/store/modules/setting";
 
-import { useRoute } from "vue-router";
+import { useRoute,useRouter } from "vue-router";
+import useUserStore from "@/store/modules/user";
 //获取路由对象
 let $route = useRoute();
+let $router = useRouter();
 let LayOutSettingStore = useLayOutSettingStore();
+const userStore = useUserStore();
 //点击图标的切换
 const changeIcon = () => {
     //图标进行切换
@@ -102,6 +105,13 @@ const fullScreen = () => {
     document.exitFullscreen()
   }
 }
+
+const logout = () => {
+  userStore.userLogout()
+  $router.push({ path: '/login', query: { redirect: $route.path } })
+
+}
+
 </script>
 
 <style lang="scss" scoped>

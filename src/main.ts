@@ -6,17 +6,17 @@ import router from "./router/index";
 
 import "element-plus/dist/index.css";
 import ElementPlus from "element-plus";
-import { createPinia } from "pinia";
+import pinia from "./store";
 import "virtual:svg-icons-register";
 
 import gloablComponent from "./components/index";
-
+import "./permisstion";
 
 
 const app = createApp(App)
 app.use(ElementPlus);
 app.use(router);
-app.use(createPinia());
+app.use(pinia);
 
 
 app.use(gloablComponent);
