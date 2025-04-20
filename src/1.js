@@ -1,38 +1,23 @@
-function calTime(start, end) {
-    var lis = document.querySelectorAll(
-        "#mirror-vdcon > div.right-container > div > div.rcmd-tab > div.video-pod.video-pod > div.video-pod__body > div > div > div.stats > div"
-    );
+function calTime(s, e) {
+    let n = document.querySelector(".list-count"),
+        p = n ? `div.action-list-content > div:nth-child(${n.innerText.split("/")[0]}) .duration` : ".list .duration",
+        l = document.querySelectorAll(p),
+        h = 0, m = 0, t = 0;
 
-
-    var time_h = 0; // 小时
-    var time_m = 0; // 分
-    var time_s = 0; // 秒
-
-    lis.forEach((currentValue, index) => {
-        if (index >= start - 1 && index <= end - 1) {
-            let time = currentValue.innerText;
-            // 操作string类型的时长信息
-            let timeArr = time.split(":");
-            if (timeArr.length == 3) {
-                //分集时长显示包含小时的情况
-                time_h += Number(timeArr[0]);
-                time_m += Number(timeArr[1]);
-                time_s += Number(timeArr[2]);
-            } else {
-                time_m += Number(timeArr[0]);
-                time_s += Number(timeArr[1]);
-            }
+    l.forEach((v, i) => {
+        if (i >= s - 1 && i <= e - 1) {
+            let a = v.innerText.split(":").map(Number);
+            [h1, m1, s1] = a.length === 3 ? a : [0, ...a];
+            h += h1; m += m1; t += s1;
         }
     });
-    // 得到总时长mm:ss格式
-    time_m = time_m + parseInt(time_s / 60);
-    time_s = time_s % 60;
-    // 计算小时
-    time_h += parseInt(time_m / 60);
-    time_m = time_m % 60;
-    console.log(
-        `从p${start}到p${end} 总时长为${time_h}h ${time_m}min ${time_s}s`
-    );
-}
 
-calTime(start, end);
+    m += Math.floor(t / 60);
+    t %= 60;
+    h += Math.floor(m / 60);
+    m %= 60;
+
+    console.log(`视频一共有${l.length}个`);
+    console.log(`从p${s}到p${e} 总时长为${h}h ${m}min ${t}s`);
+}
+calTime(0, 2);

@@ -25,6 +25,8 @@
     p {
       font-size: $base-logo-title-fontSize;
       margin-left: 10px;
+      overflow: hidden;
+      white-space: nowrap;
     }
   }
 </style>

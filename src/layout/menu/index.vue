@@ -56,7 +56,6 @@ import { useRouter } from "vue-router";
 let $router = useRouter();
 const goRoute = (vc: any) => {
     //路由跳转
-    console.log(vc.index);
     $router.push(vc.index);
 };
 </script>

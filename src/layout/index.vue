@@ -2,9 +2,13 @@
 import Logo from "./logo/index.vue";
 import Menu from "./menu/index.vue";
 import Main from "./main/index.vue";
+import Tabbar from "./tabbar/index.vue";
 import useUserStore from "@/store/modules/user";
 
 import { useRouter } from "vue-router";
+
+import useLayOutSettingStore from '@/store/modules/setting'
+let LayOutSettingStore = useLayOutSettingStore();
 
 let userStore = useUserStore();
 
@@ -14,7 +18,7 @@ console.log($router.currentRoute.value.path);
 
 <template>
     <div class="layout_container">
-        <div class="layout_slider">
+        <div class="layout_slider" :class="{fold:LayOutSettingStore.fold }">
             <el-scrollbar class="scrollbar">
                 <Logo></Logo>
                 <!-- 菜单组件 -->
@@ -22,15 +26,18 @@ console.log($router.currentRoute.value.path);
                     background-color="#001529"
                     text-color="white"
                     :default-active="$router.currentRoute.value.path"
+                    :collapse="LayOutSettingStore.fold"
                 >
                     <Menu :menuList="userStore.menuRoutes"></Menu>
                 </el-menu>
             </el-scrollbar>
         </div>
         <!-- 顶部导航 -->
-        <div class="layout_tabbar"></div>
+        <div class="layout_tabbar" :class="{fold:LayOutSettingStore.fold }">
+            <Tabbar></Tabbar>
+        </div>
         <!-- 内容展示区域 -->
-        <div class="layout_main">
+        <div class="layout_main" :class="{fold:LayOutSettingStore.fold }">
             <Main></Main>
         </div>
     </div>
@@ -44,14 +51,25 @@ console.log($router.currentRoute.value.path);
         width: $base-menu-width;
         height: 100vh;
         background: $base-menu-background;
+        transition: all 0.3s;
+
+        &.fold{
+            width:$base-menu-min-width
+        }
     }
     .layout_tabbar {
         position: fixed;
+        color:white;
         width: calc(100% - $base-menu-width);
         height: $base-tabbar-height;
-        background: cyan;
         top: 0;
         left: $base-menu-width;
+        transition: all 0.3s;
+
+        &.fold{
+            width:calc(100% - $base-menu-min-width);
+            left:$base-menu-min-width;
+        }
 
         .scrollbar {
             height: calc(100% - $base-menu-logo-height);
@@ -66,6 +84,14 @@ console.log($router.currentRoute.value.path);
         top: $base-tabbar-height;
         padding: 20px;
         overflow: auto;
+        transition: all 0.3s;
+
+
+        &.fold{
+            width:calc(100% - $base-menu-min-width);
+            left:$base-menu-min-width;
+        }
+
     }
 }
 </style>
