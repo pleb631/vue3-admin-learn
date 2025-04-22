@@ -3,7 +3,6 @@
         v-for="(item, index) in menuList"
         :key="item.path"
     >
-        <!-- 没有子路由 -->
         <template v-if="!item.children">
             <el-menu-item
                 v-if="!item.meta.hidden"
@@ -18,7 +17,7 @@
                 </template>
             </el-menu-item>
         </template>
-        <!-- 有且只有一个子路由 -->
+
         <template v-if="item.children && item.children.length == 1">
             <el-menu-item
                 :index="item.children[0].path"
@@ -33,7 +32,7 @@
                 </template>
             </el-menu-item>
         </template>
-        <!-- 有子路由且个数大于一个 -->
+
         <el-sub-menu
             :index="item.path"
             v-if="item.children && item.children.length >= 2"
@@ -50,12 +49,10 @@
 </template>
 
 <script setup lang="ts">
-//获取父组件传递过来的全部路由数组
 defineProps(["menuList"]);
 import { useRouter } from "vue-router";
 let $router = useRouter();
 const goRoute = (vc: any) => {
-    //路由跳转
     $router.push(vc.index);
 };
 </script>

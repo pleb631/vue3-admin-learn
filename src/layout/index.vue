@@ -7,7 +7,7 @@ import useUserStore from "@/store/modules/user";
 
 import { useRouter } from "vue-router";
 
-import useLayOutSettingStore from '@/store/modules/setting'
+import useLayOutSettingStore from "@/store/modules/setting";
 let LayOutSettingStore = useLayOutSettingStore();
 
 let userStore = useUserStore();
@@ -17,10 +17,13 @@ const $router = useRouter();
 
 <template>
     <div class="layout_container">
-        <div class="layout_slider" :class="{fold:LayOutSettingStore.fold }">
+        <div
+            class="layout_slider"
+            :class="{ fold: LayOutSettingStore.fold }"
+        >
             <el-scrollbar class="scrollbar">
                 <Logo></Logo>
-                <!-- 菜单组件 -->
+
                 <el-menu
                     background-color="#001529"
                     text-color="white"
@@ -31,12 +34,18 @@ const $router = useRouter();
                 </el-menu>
             </el-scrollbar>
         </div>
-        <!-- 顶部导航 -->
-        <div class="layout_tabbar" :class="{fold:LayOutSettingStore.fold }">
+
+        <div
+            class="layout_tabbar"
+            :class="{ fold: LayOutSettingStore.fold }"
+        >
             <Tabbar></Tabbar>
         </div>
-        <!-- 内容展示区域 -->
-        <div class="layout_main" :class="{fold:LayOutSettingStore.fold }">
+
+        <div
+            class="layout_main"
+            :class="{ fold: LayOutSettingStore.fold }"
+        >
             <Main></Main>
         </div>
     </div>
@@ -52,22 +61,22 @@ const $router = useRouter();
         background: $base-menu-background;
         transition: all 0.3s;
 
-        &.fold{
-            width:$base-menu-min-width
+        &.fold {
+            width: $base-menu-min-width;
         }
     }
     .layout_tabbar {
         position: fixed;
-        color:white;
+        color: white;
         width: calc(100% - $base-menu-width);
         height: $base-tabbar-height;
         top: 0;
         left: $base-menu-width;
         transition: all 0.3s;
 
-        &.fold{
-            width:calc(100% - $base-menu-min-width);
-            left:$base-menu-min-width;
+        &.fold {
+            width: calc(100% - $base-menu-min-width);
+            left: $base-menu-min-width;
         }
 
         .scrollbar {
@@ -85,12 +94,10 @@ const $router = useRouter();
         overflow: auto;
         transition: all 0.3s;
 
-
-        &.fold{
-            width:calc(100% - $base-menu-min-width);
-            left:$base-menu-min-width;
+        &.fold {
+            width: calc(100% - $base-menu-min-width);
+            left: $base-menu-min-width;
         }
-
     }
 }
 </style>

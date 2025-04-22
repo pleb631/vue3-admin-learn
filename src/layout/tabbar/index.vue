@@ -1,9 +1,8 @@
-
-import type { Loading } from 'element-plus/es/components/loading/src/service.mjs';
+import type { Loading } from
+'element-plus/es/components/loading/src/service.mjs';
 <template>
     <div class="tabbar">
         <div class="tabbar_left">
-            <!-- 顶部左侧的图标 -->
             <el-icon
                 style="margin-right: 10px"
                 @click="changeIcon"
@@ -12,10 +11,8 @@ import type { Loading } from 'element-plus/es/components/loading/src/service.mjs
                     :is="LayOutSettingStore.fold ? 'Fold' : 'Expand'"
                 ></component>
             </el-icon>
-            <!-- 左侧的面包屑 -->
-            <el-breadcrumb
-                separator-icon="ArrowRight"
-            >
+
+            <el-breadcrumb separator-icon="ArrowRight">
                 <el-breadcrumb-item
                     v-for="(item, index) in $route.matched"
                     :key="index"
@@ -51,9 +48,14 @@ import type { Loading } from 'element-plus/es/components/loading/src/service.mjs
             ></el-button>
             <img
                 :src="userStore.avatar"
-                style="width: 24px; height: 24px; margin: 0px 10px; border-radius: 50%;"
+                style="
+                    width: 24px;
+                    height: 24px;
+                    margin: 0px 10px;
+                    border-radius: 50%;
+                "
             />
-            <!-- 下拉菜单 -->
+
             <el-dropdown>
                 <span class="el-dropdown-link">
                     {{ userStore.username }}
@@ -63,7 +65,9 @@ import type { Loading } from 'element-plus/es/components/loading/src/service.mjs
                 </span>
                 <template #dropdown>
                     <el-dropdown-menu>
-                        <el-dropdown-item @click="logout">退出登陆</el-dropdown-item>
+                        <el-dropdown-item @click="logout"
+                            >退出登陆</el-dropdown-item
+                        >
                     </el-dropdown-menu>
                 </template>
             </el-dropdown>
@@ -74,44 +78,36 @@ import type { Loading } from 'element-plus/es/components/loading/src/service.mjs
 <script setup lang="ts">
 import useLayOutSettingStore from "@/store/modules/setting";
 
-import { useRoute,useRouter } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import useUserStore from "@/store/modules/user";
-//获取路由对象
+
 let $route = useRoute();
 let $router = useRouter();
 let LayOutSettingStore = useLayOutSettingStore();
 const userStore = useUserStore();
-//点击图标的切换
+
 const changeIcon = () => {
-    //图标进行切换
     LayOutSettingStore.fold = !LayOutSettingStore.fold;
 };
 
 const updateRefresh = () => {
-
-  LayOutSettingStore.refresh = !LayOutSettingStore.refresh
+    LayOutSettingStore.refresh = !LayOutSettingStore.refresh;
 };
 
-//全屏按钮点击的回调
 const fullScreen = () => {
-  //DOM对象的一个属性：可以用来判断当前是不是全屏的模式【全屏：true，不是全屏：false】
-  let full = document.fullscreenElement
-  //切换成全屏
-  if (!full) {
-    //文档根节点的方法requestFullscreen实现全屏
-    document.documentElement.requestFullscreen()
-  } else {
-    //退出全屏
-    document.exitFullscreen()
-  }
-}
+    let full = document.fullscreenElement;
+
+    if (!full) {
+        document.documentElement.requestFullscreen();
+    } else {
+        document.exitFullscreen();
+    }
+};
 
 const logout = async () => {
-  await userStore.userLogout()
-  $router.push({ path: '/login', query: { redirect: $route.path } })
-
-}
-
+    await userStore.userLogout();
+    $router.push({ path: "/login", query: { redirect: $route.path } });
+};
 </script>
 
 <style lang="scss" scoped>

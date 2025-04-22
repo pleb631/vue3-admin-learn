@@ -1,19 +1,13 @@
-//创建用户相关的小仓库
 import { defineStore } from "pinia";
-//引入接口
 import { reqLogin, reqUserInfo, reqLogout } from "@/api/user";
 import type { UserState } from "./types/type";
-//引入操作本地存储的工具方法
 import { SET_TOKEN, GET_TOKEN, REMOVE_TOKEN } from "@/utils/token";
-//引入路由（常量路由）
 import { constantRoute } from "@/router/routes";
 
-//创建用户小仓库
 const useUserStore = defineStore("User", {
-    //小仓库存储数据地方
     state: (): UserState => {
         return {
-            token: GET_TOKEN(), //用户唯一标识token
+            token: GET_TOKEN(),
             menuRoutes: constantRoute,
             username: "",
             avatar: "",
@@ -21,9 +15,7 @@ const useUserStore = defineStore("User", {
     },
 
     actions: {
-
         async userLogin(data: any) {
-
             const result: any = await reqLogin(data);
 
             if (result.code == 200) {
