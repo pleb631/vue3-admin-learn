@@ -37,7 +37,6 @@
             <el-table-column label="品牌操作">
                 <template #="{ row, $index }">
                     <el-button
-                        type="text"
                         size="small"
                         @click="updateTradeMar(row)"
                         >修改</el-button
@@ -47,7 +46,7 @@
                         @confirm="removeTradeMark(row.id)"
                     >
                         <template #reference>
-                            <el-button>Delete</el-button>
+                            <el-button size="small">Delete</el-button>
                         </template>
                     </el-popconfirm>
                 </template>
@@ -155,7 +154,8 @@ const trademarkParams = reactive<TradeMark>({
     logoUrl: "",
 });
 
-const getHasTrademark = async () => {
+const getHasTrademark = async (page: number = 1) => {
+    pageNo.value = page;
     let result: TradeMarkResponseData = await reqHasTrademark(
         pageNo.value,
         limit.value
@@ -168,7 +168,6 @@ const getHasTrademark = async () => {
 };
 
 const sizeChange = () => {
-    pageNo.value = 1;
     getHasTrademark();
 };
 
@@ -211,8 +210,8 @@ const handleAvatarSuccess: UploadProps["onSuccess"] = (
 };
 
 const confirm = async () => {
-    if(trademarkParams.logoUrl==""){
-        trademarkParams.logoUrl='http'
+    if (trademarkParams.logoUrl == "") {
+        trademarkParams.logoUrl = "";
     }
     await formRef.value.validate();
     let result: any = await reqAddOrUpdateTrademark(trademarkParams);
@@ -222,19 +221,15 @@ const confirm = async () => {
             type: "success",
             message: trademarkParams.id ? "修改品牌成功" : "添加品牌成功",
         });
-        if (trademarkParams.id) {
-            getHasTrademark();
-        } else {
-            sizeChange();
-        }
+
+        getHasTrademark(trademarkParams.id ? pageNo.value : 1);
     } else {
         ElMessage({
             type: "error",
             message: trademarkParams.id ? "修改品牌失败" : "添加品牌失败",
         });
-
     }
-    cancel()
+    cancel();
 };
 const cancel = () => {
     dialogFormVisible.value = false;
