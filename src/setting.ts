@@ -1,5 +1,5 @@
 export default {
-    title: "Vue-Admin", //项目的标题
-    logo: "/logo.jpg", //项目logo设置
+    title: "Vue-Admin", 
+    logo: "/logo.jpg", 
     logoHidden: true,
 };

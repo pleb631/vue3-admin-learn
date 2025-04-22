@@ -1,27 +1,19 @@
+import nprogress from "nprogress";
+import "nprogress/nprogress.css";
 
 import router from "@/router";
 import setting from "./setting";
-import nprogress from "nprogress";
-
-import "nprogress/nprogress.css";
+import useUserStore from "./store/modules/user";
+import pinia from "./store";
 
 nprogress.configure({ showSpinner: false });
-
-import useUserStore from "./store/modules/user";
-
-import pinia from "./store";
 const userStore = useUserStore(pinia);
 
-//全局前置守卫
 router.beforeEach(async (to: any, from: any, next: any) => {
     document.title = `${setting.title}-${to.meta.title}`;
-
     nprogress.start();
-
     const token = userStore.token;
-
     let username = userStore.username;
-
     if (token) {
         if (to.path == "/login") {
             next("/home");
