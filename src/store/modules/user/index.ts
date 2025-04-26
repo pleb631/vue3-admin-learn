@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import { reqLogin, reqUserInfo, reqLogout } from "@/api/user";
-import type { UserState } from "./types/type";
+import type { UserState } from "./type";
 import { SET_TOKEN, GET_TOKEN, REMOVE_TOKEN } from "@/utils/token";
 import { constantRoute } from "@/router/routes";
 
