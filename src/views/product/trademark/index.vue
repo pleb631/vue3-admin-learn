@@ -136,9 +136,8 @@ import {
     reqHasTrademark,
     reqAddOrUpdateTrademark,
     reqDeleteTrademark,
-} from "@/api/product/trademark.ts";
-import type { Records, TradeMarkResponseData } from "@/api/product/type.ts";
-import type { TradeMark } from "@/api/product/trademark/type";
+} from "@/api/product/trademark";
+import type { Records, TradeMarkResponseData,TradeMark } from "@/api/product/trademark/type.ts";
 
 const table = ref();
 const formRef = ref();
