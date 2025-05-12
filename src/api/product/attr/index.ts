@@ -10,6 +10,8 @@ enum API {
     //获取三级分类接口地址
     C3_URL = "/admin/product/getCategory3/",
     ATTR_URL = "/admin/product/attrInfoList/",
+    ADDORUPDATEATTR_URL = "/admin/product/saveAttrInfo",
+    DELETEATTR_URL = "/admin/product/deleteAttr/",
 }
 
 //获取一级分类的接口方法
@@ -33,3 +35,10 @@ export const reqAttr = (
         API.ATTR_URL + `${category1Id}/${category2Id}/${category3Id}`
     );
 };
+
+
+export const reqAddOrUpdateAttr = (data: Attr) =>
+    request.post<any, any>(API.ADDORUPDATEATTR_URL, data);
+
+export const reqRemoveAttr = (attrId: number) =>
+    request.delete<any, any>(API.DELETEATTR_URL + attrId);
