@@ -3,6 +3,7 @@
         <el-form inline>
             <el-form-item label="一级分类">
                 <el-select
+                    :disabled="scene === 1"
                     v-model="categoryStore.c1Id"
                     @change="handler"
                 >
@@ -17,9 +18,9 @@
             </el-form-item>
             <el-form-item label="二级分类">
                 <el-select
+                    :disabled="scene === 1"
                     v-model="categoryStore.c2Id"
                     @change="handler1"
-                    :disable="categoryStore.c2Arr.length === 0"
                 >
                     <!-- label:即为展示数据 value:即为select下拉菜单收集的数据 -->
                     <el-option
@@ -27,12 +28,14 @@
                         :key="c2.id"
                         :label="c2.name"
                         :value="c2.id"
-                        :disable="categoryStore.c3Arr.length === 0"
                     ></el-option>
                 </el-select>
             </el-form-item>
             <el-form-item label="三级分类">
-                <el-select v-model="categoryStore.c3Id">
+                <el-select
+                    v-model="categoryStore.c3Id"
+                    :disabled="scene === 1"
+                >
                     <!-- label:即为展示数据 value:即为select下拉菜单收集的数据 -->
                     <el-option
                         v-for="(c3, index) in categoryStore.c3Arr"
@@ -52,6 +55,8 @@ import { onMounted } from "vue";
 //引入分类相关的仓库
 import useCategoryStore from "@/store/modules/category";
 let categoryStore = useCategoryStore();
+
+defineProps(["scene"]);
 //分类全局组件挂载完毕,通知仓库发请求获取一级分类的数据
 onMounted(() => {
     getC1();
