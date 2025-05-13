@@ -16,7 +16,7 @@
                     :model="loginForm"
                 >
                     <h1>Hello</h1>
-                    <h2>欢迎来到硅谷甄选</h2>
+                    <h2>欢迎来到管理平台</h2>
                     <el-form-item prop="username">
                         <el-input
                             :prefix-icon="User"
@@ -55,7 +55,6 @@ import { ElNotification } from "element-plus";
 import useUserStore from "@/store/modules/user";
 
 import { getTime } from "@/utils/time";
-//引入路由
 
 import { useRouter, useRoute } from "vue-router";
 const $router = useRouter();
@@ -64,11 +63,9 @@ const $route = useRoute();
 let useStore = useUserStore();
 let loginForms = ref();
 
-//收集账号与密码数据
 let loginForm = reactive({ username: "admin", password: "111111" });
 const loading = ref(false);
 const login = async () => {
-    //按钮加载效果
     await loginForms.value.validate();
 
     loading.value = true;
@@ -95,9 +92,6 @@ const login = async () => {
 };
 
 const validatorUserName = (rule: any, value: any, callback: any) => {
-    //rule：校验规则对象
-    //value:表单元素文本内容
-    //callback:符合条件，callback放行通过，不符合：注入错误提示信息
     if (value.length >= 5) {
         callback();
     } else {
@@ -112,7 +106,6 @@ const validatorPassword = (rule: any, value: any, callback: any) => {
         callback(new Error("密码长度至少6位"));
     }
 };
-//定义表单校验需要的配置对象
 const rules = {
     username: [{ trigger: "blur", validator: validatorUserName }],
     password: [{ trigger: "blur", validator: validatorPassword }],
