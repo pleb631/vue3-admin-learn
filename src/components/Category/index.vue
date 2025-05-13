@@ -50,20 +50,15 @@
 </template>
 
 <script setup lang="ts">
-//引入组件挂载完毕方法
 import { onMounted } from "vue";
-//引入分类相关的仓库
 import useCategoryStore from "@/store/modules/category";
 let categoryStore = useCategoryStore();
 
 defineProps(["scene"]);
-//分类全局组件挂载完毕,通知仓库发请求获取一级分类的数据
 onMounted(() => {
     getC1();
 });
-//通知仓库获取一级分类的方法
 const getC1 = () => {
-    //通知分类仓库发请求获取一级分类的数据
     categoryStore.c3Id = "";
     categoryStore.c2Id = "";
     categoryStore.c1Id = "";
@@ -74,7 +69,6 @@ const getC1 = () => {
 };
 
 const handler = () => {
-    //通知仓库获取二级分类的数据
     categoryStore.c3Id = "";
     categoryStore.c2Id = "";
     categoryStore.c3Arr = [];
@@ -82,7 +76,6 @@ const handler = () => {
 };
 
 const handler1 = () => {
-    //清理三级分类的数据
     categoryStore.c3Id = "";
     categoryStore.getC3();
 };
