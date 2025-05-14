@@ -12,14 +12,20 @@ export const constantRoute = [
     {
         path: "/",
         component: () => import("@/layout/index.vue"),
+        name: "layout",
+        meta: {
+            title: "",
+            hidden: false,
+            icon: "",
+        },
         redirect: "/home",
         children: [
             {
                 path: "/home",
                 component: () => import("@/views/home/index.vue"),
-                name: "home",
                 meta: {
-                    title: "home",
+                    title: "首页",
+                    hidden: false,
                     icon: "HomeFilled",
                 },
             },
@@ -28,10 +34,11 @@ export const constantRoute = [
     {
         path: "/screen",
         component: () => import("@/views/screen/index.vue"),
-        name: "screen",
+        name: "Screen",
         meta: {
-            title: "screen",
-            icon: "Monitor",
+            title: "Screen",
+            hidden: false,
+            icon: "Platform",
         },
     },
     {
@@ -43,12 +50,16 @@ export const constantRoute = [
             hidden: true,
         },
     },
+];
+
+export const asyncRoute = [
     {
         path: "/acl",
         component: () => import("@/layout/index.vue"),
         name: "Acl",
         meta: {
             title: "权限管理",
+            hidden: false,
             icon: "Lock",
         },
         redirect: "/acl/user",
@@ -59,6 +70,7 @@ export const constantRoute = [
                 name: "User",
                 meta: {
                     title: "用户管理",
+                    hidden: false,
                     icon: "User",
                 },
             },
@@ -67,32 +79,22 @@ export const constantRoute = [
                 component: () => import("@/views/acl/role/index.vue"),
                 name: "Role",
                 meta: {
-       
                     title: "角色管理",
-                    icon: "UserFilled",
+                    hidden: false,
+                    icon: "Avatar",
                 },
             },
             {
                 path: "/acl/permission",
-                component: () => import("@/views/acl/permission/index.vue"),
+                component: () => import("@/views/acl/menu/index.vue"),
                 name: "Permission",
                 meta: {
-             
                     title: "菜单管理",
-                    icon: "Monitor",
+                    hidden: false,
+                    icon: "List",
                 },
             },
         ],
-    },
-
-    {
-        path: "/:pathMatch(.*)*",
-        redirect: "/404",
-        name: "any",
-        meta: {
-            title: "any",
-            hidden: true,
-        },
     },
     {
         path: "/product",
@@ -100,7 +102,7 @@ export const constantRoute = [
         name: "Product",
         meta: {
             title: "商品管理",
-     
+            hidden: false,
             icon: "Goods",
         },
         redirect: "/product/trademark",
@@ -112,7 +114,7 @@ export const constantRoute = [
                 meta: {
                     title: "品牌管理",
                     icon: "ShoppingCart",
-    
+                    hidden: false,
                 },
             },
             {
@@ -122,7 +124,7 @@ export const constantRoute = [
                 meta: {
                     title: "属性管理",
                     icon: "Management",
-       
+                    hidden: false,
                 },
             },
             {
@@ -132,7 +134,7 @@ export const constantRoute = [
                 meta: {
                     title: "Spu",
                     icon: "SetUp",
-     
+                    hidden: false,
                 },
             },
             {
@@ -142,9 +144,19 @@ export const constantRoute = [
                 meta: {
                     title: "Sku",
                     icon: "ScaleToOriginal",
-            
+                    hidden: false,
                 },
             },
         ],
     },
 ];
+
+export const anyRoute = {
+    path: "/:pathMatch(.*)*",
+    redirect: "/404",
+    name: "Any",
+    meta: {
+        title: "任意路由",
+        hidden: true,
+    },
+};
