@@ -11,6 +11,9 @@ import { viteMockServe } from "vite-plugin-mock";
 export default ({ command, mode }) => {
     let env = loadEnv(mode, process.cwd());
     return {
+        build: {
+            outDir: "docs",
+        },
         plugins: [
             vue(),
             VueSetupExtend(),
