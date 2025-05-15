@@ -11,6 +11,7 @@ import { viteMockServe } from "vite-plugin-mock";
 export default ({ command, mode }) => {
     let env = loadEnv(mode, process.cwd());
     console.log("✅ 当前使用 vite.config.js 配置文件");
+    console.log(env.VITE_APP_BASE_API);
     return {
         base: "/vue3-admin-learn/",
         build: {
