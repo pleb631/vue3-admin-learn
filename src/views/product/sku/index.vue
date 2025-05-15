@@ -53,6 +53,7 @@
                     <el-button
                         :type="row.isSale == 1 ? 'info' : 'success'"
                         size="small"
+                        v-has="'btn.Sku.updown'"
                         :icon="row.isSale == 1 ? 'Bottom' : 'Top'"
                         @click="updateSale(row)"
                     ></el-button>

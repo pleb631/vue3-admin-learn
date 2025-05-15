@@ -10,12 +10,12 @@ import "element-plus/theme-chalk/dark/css-vars.css";
 import router from "./router/index";
 import gloablComponent from "./components/index";
 import "./permisstion";
-
+import { isHasButton } from "@/directive/has";
 const app = createApp(App);
 app.use(ElementPlus);
 app.use(router);
 app.use(pinia);
 
 app.use(gloablComponent);
-
+isHasButton(app);
 app.mount("#app");

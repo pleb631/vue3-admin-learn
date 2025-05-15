@@ -27,6 +27,8 @@ const useUserStore = defineStore("User", {
             menuRoutes: constantRoute,
             username: "",
             avatar: "",
+            buttons: [],
+            
         };
     },
 
@@ -51,6 +53,7 @@ const useUserStore = defineStore("User", {
             if (result.code == 200) {
                 this.username = result.data.name;
                 this.avatar = result.data.avatar;
+                this.buttons = result.data.buttons;
 
                 const userAsyncRoute = filterAsyncRoute(
                     cloneDeep(asyncRoute),
