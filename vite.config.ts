@@ -13,7 +13,7 @@ export default ({ command, mode }) => {
     return {
         build: {
             outDir: "docs",
-            base: "/VITE_APP_BASE_API/",
+            base: env.VITE_APP_BASE_URL,
         },
         plugins: [
             vue(),
