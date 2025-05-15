@@ -13,7 +13,7 @@ export default ({ command, mode }) => {
     return {
         build: {
             outDir: "docs",
-            base: env.VITE_APP_BASE_URL,
+            base: "/vue3-admin-learn/",
         },
         plugins: [
             vue(),
